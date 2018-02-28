@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>
-			iFundFilm | Dashboard
+			iFundFilm | @yield('title')
 		</title>
 		<meta name="description" content="Latest updates and statistic charts">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,11 +24,27 @@
 		<link href="/css/vendors.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Base Styles -->
+		{{-- custom style --}}
+		<link href="/css/master.custom.css" rel="stylesheet" type="text/css" />
+		<link href="/css/master.loader.css" rel="stylesheet" type="text/css" />
+		{{-- end custom style --}}
 		<link rel="shortcut icon" href="/assets/images/favicon/fav_ico.png" />
 	</head>
 	<!-- end::Head -->
   <!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+		{{-- start loading --}}
+		<div class="loader-container circle-pulse-multiple">
+				<div class="loaders">
+						<div id="loading-center-absolute">
+								<div class="object" id="object_four"></div>
+								<div class="object" id="object_three"></div>
+								<div class="object" id="object_two"></div>
+								<div class="object" id="object_one"></div>
+						</div>
+				</div>
+		</div>
+		{{-- end loading --}}
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
       <!-- BEGIN: Header -->
@@ -39,8 +55,8 @@
 						<div class="m-stack__item m-brand  m-brand--skin-dark ">
 							<div class="m-stack m-stack--ver m-stack--general">
 								<div class="m-stack__item m-stack__item--middle m-brand__logo">
-									<a href="index.html" class="m-brand__logo-wrapper">
-										<img alt="" src="/assets/images/logo_default_dark.png"/>
+									<a href="/" class="m-brand__logo-wrapper">
+										<img alt="" src="/assets/images/adminlog.svg" style="width: 130px;" />
 									</a>
 								</div>
 								<div class="m-stack__item m-stack__item--middle m-brand__tools">
@@ -173,10 +189,10 @@
 															</div>
 															<div class="m-card-user__details">
 																<span class="m-card-user__name m--font-weight-500">
-																	Mark Andre
+																	{{Auth::user()->username}}
 																</span>
 																<a href="" class="m-card-user__email m--font-weight-300 m-link">
-																	mark.andre@gmail.com
+																	{{Auth::user()->email}}
 																</a>
 															</div>
 														</div>
@@ -210,38 +226,13 @@
 																	<a href="header/profile.html" class="m-nav__link">
 																		<i class="m-nav__link-icon flaticon-share"></i>
 																		<span class="m-nav__link-text">
-																			Activity
-																		</span>
-																	</a>
-																</li>
-																<li class="m-nav__item">
-																	<a href="header/profile.html" class="m-nav__link">
-																		<i class="m-nav__link-icon flaticon-chat-1"></i>
-																		<span class="m-nav__link-text">
-																			Messages
+																			Setting
 																		</span>
 																	</a>
 																</li>
 																<li class="m-nav__separator m-nav__separator--fit"></li>
 																<li class="m-nav__item">
-																	<a href="header/profile.html" class="m-nav__link">
-																		<i class="m-nav__link-icon flaticon-info"></i>
-																		<span class="m-nav__link-text">
-																			FAQ
-																		</span>
-																	</a>
-																</li>
-																<li class="m-nav__item">
-																	<a href="header/profile.html" class="m-nav__link">
-																		<i class="m-nav__link-icon flaticon-lifebuoy"></i>
-																		<span class="m-nav__link-text">
-																			Support
-																		</span>
-																	</a>
-																</li>
-																<li class="m-nav__separator m-nav__separator--fit"></li>
-																<li class="m-nav__item">
-																	<a href="snippets/pages/user/login-1.html" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+																	<a href="{{route('admin.logout')}}" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
 																		Logout
 																	</a>
 																</li>
@@ -373,6 +364,15 @@
 		<script src="/js/vendors.bundle.js" type="text/javascript"></script>
 		<script src="/js/scripts.bundle.js" type="text/javascript"></script>
 		<!--end::Base Scripts -->
+		<script>
+			window.onload = function () {
+				setTimeout(function () {
+					$('.loader-container').fadeOut('slow'); // will first fade out the loading animation
+					$('.loader').delay(150).fadeOut('slow'); // will fade out the white DIV that covers the website.
+					$('body').delay(150).css({'overflow':'visible'});
+				}, 500);
+			}
+		</script>
 	</body>
 	<!-- end::Body -->
 </html>

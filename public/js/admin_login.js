@@ -81,13 +81,15 @@ var SnippetLogin = function() {
                 success: function(response, status, xhr, $form) {
                 	// similate 2s delay
                   if (response.result == "success") {
-                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
-                    window.location.replace(response.url);
+                    setTimeout(function() {
+                      btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+                      window.location.replace(response.url);
+                    }, 2000);
                   } else {
                     setTimeout(function() {
-  	                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
-  	                    showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
-                      }, 2000);
+	                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+	                    showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
+                    }, 2000);
                   }
                 }
             });
