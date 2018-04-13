@@ -1,0 +1,160 @@
+.m-card-profile__pic>.m-card-profile__pic-wrapper {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    padding: 2px!important;
+    background-color: #fff;
+    box-shadow: 0 8px 10px 1px rgba(143,158,181,.14), 0 3px 14px 2px rgba(0,0,0,.12), 0 5px 5px -3px rgba(143,158,181,.2);
+}
+
+.m-card-profile__pic>.m-card-profile__pic-wrapper img {
+    width: 100%;
+}
+
+.m-card-profile__pic>.m-card-profile__pic-wrapper>.m-card-profile__pic-edit_wrapper {
+    position: absolute;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    top: 2px;
+    left: 2px;
+    border-radius: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    outline: 0;
+}
+.m-card-profile__pic>.m-card-profile__pic-wrapper>.m-card-profile__pic-edit_wrapper:hover,
+.m-card-profile__pic>.m-card-profile__pic-wrapper>.m-card-profile__pic-edit_wrapper:focus,
+.m-card-profile__pic>.m-card-profile__pic-wrapper>.m-card-profile__pic-edit_wrapper:active,
+.m-card-profile__pic>.m-card-profile__pic-wrapper>.m-card-profile__pic-edit_wrapper:focus:active {
+    outline: 0;
+}
+
+.m-card-profile__pic>.m-card-profile__pic-wrapper>.m-card-profile__pic-edit_wrapper:hover::before {
+    content: "\f191";
+    font-family: Flaticon;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    display: flex;
+    vertical-align: middle;
+    text-align: center;
+    opacity: 0.6;
+    animation-name: overlayup;
+    animation-duration: .3s;
+    background: #000;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+@keyframes overlayup {
+    from {bottom: -100%}
+    to {bottom: 0;}
+}
+
+@-webkit-keyframes overlayup {
+    from {bottom: -100%}
+    to {bottom: 0;}
+}
+
+@-moz-keyframes overlayup {
+    from {bottom: -100%}
+    to {bottom: 0;}
+}
+
+@-o-keyframes overlayup {
+    from {bottom: -100%}
+    to {bottom: 0;}
+}
+
+#m-user__pic-avatar-slim {
+    border-radius: 100%;
+    background-color: #f1f1f1;
+    color: #888888;
+    transition: all .3s ease-out;
+    font-weight: 600;
+}
+
+#m-user__pic-avatar-slim:hover {
+    background-color:  rgb(215, 215, 215);
+    color: #000;
+}
+#m-user__pic-avatar-slim[data-state*=error] {
+    color: rgb(129, 8, 5)!important;
+}
+#m-user__pic-cover-slim {
+    border-radius: 7px;
+    background-color: #f1f1f1;
+    color: #888888;
+    transition: all .3s ease-out;
+    font-weight: 600;
+}
+#m-user__pic-cover-slim:hover {
+    background-color:  rgb(215, 215, 215);
+    color: #000;
+}
+#m-user__pic-cover-slim[data-state*=error] {
+    color: rgb(129, 8, 5)!important;
+}
+.m-card-profile {
+    padding-top: 0!important;
+}
+.m-card-profile >.m-card-profile__pic {
+    position: relative;
+    padding: 0!important;
+}
+.m-card-profile >.m-card-profile__pic>.m-card-profile__cover-pic {
+    width: calc(100% + 4.4rem);
+    height: 85%;
+    top: -2.2rem;
+    left: -2.2rem;
+    position: absolute;
+    background-image: url(/assets/app/media/img/misc/user_profile_bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    box-shadow: 0 7px 10px 1px rgba(143,158,181,.14), 0 3px 14px 2px rgba(0,0,0,.12), 0 5px 5px -3px rgba(143,158,181,.2);
+}
+.m-card-profile >.m-card-profile__pic>.m-card-profile__cover-pic>a {
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+    display: flex;
+    border: 1px solid #d2d1d1;
+    border-radius: 50%;
+    font-size: 10px;
+    flex-direction: column;
+    justify-content: center;
+    color: #717070;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    transition: all .2s ease-out;
+    text-decoration: none;
+    background-color: #d2d1d1;
+    box-shadow: 0 8px 10px 1px rgba(143,158,181,.14), 0 3px 14px 2px rgba(0,0,0,.12), 0 5px 5px -3px rgba(143,158,181,.2);
+}
+.m-card-profile >.m-card-profile__pic>.m-card-profile__cover-pic>a:hover {
+    background: #575757;
+    border: 1px solid #575757;
+    color: #d2c9c9;
+    text-decoration: underline;
+}
+.m-card-profile >.m-card-profile__pic>.m-card-profile__cover-pic>a>i{
+    font-size: 15px;
+}
+.m-user-unique_username-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+.has-danger .input-group-addon, .has-danger .form-control {
+    border-color: #ff4646!important;
+}
+.has-success .input-group-addon, .has-success .form-control {
+    border-color: #11bd7f!important;
+}

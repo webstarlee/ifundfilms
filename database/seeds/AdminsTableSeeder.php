@@ -1,8 +1,9 @@
 <?php
 
 use App\Admin;
-use Illuminate\Database\Seeder;
+use App\Setting;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 
 class AdminsTableSeeder extends Seeder
 {
@@ -13,21 +14,42 @@ class AdminsTableSeeder extends Seeder
      */
     public function run()
     {
-      Model::unguard();
-      DB::table('admins')->delete();
+        Model::unguard();
+        DB::table('admins')->delete();
 
-      $admins = [
-        [
-        'username' => 'Gene Sibbett',
-        'email' => 'admin@mail.com',
-        'password' => bcrypt('secret'),
-        'remember_token' => str_random(10),
-        ]
-      ];
+        $admins = [
+            [
+                'first_name' => 'Gene',
+                'last_name' => 'Sibbett',
+                'username' => 'Gene',
+                'unique_id' => str_random(10),
+                'email' => 'admin@mail.com',
+                'password' => bcrypt('secret'),
+                'remember_token' => str_random(10),
+            ],
+        ];
 
-      foreach ($admins as $admin) {
-           Admin::create($admin);
-       }
-       Model::reguard();
+        foreach ($admins as $admin) {
+            Admin::create($admin);
+        }
+        Model::reguard();
+
+        // setting table
+
+        Model::unguard();
+        DB::table('settings')->delete();
+
+        $settings = [
+            [
+                'app_name' => 'iFundFilm',
+                'logo_img' => 'default.jpg',
+                'logo_fav' => 'default.jpg',
+            ],
+        ];
+
+        foreach ($settings as $setting) {
+            Setting::create($setting);
+        }
+        Model::reguard();
     }
 }

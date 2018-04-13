@@ -1,0 +1,75 @@
+.wizard-navigation {
+    position: relative;
+    width: 100%!important;
+}
+#add-new-user-moving-tab {
+    position: absolute;
+    text-align: center;
+    padding: 12px;
+    font-size: 13px;
+    text-transform: uppercase;
+    -webkit-font-smoothing: subpixel-antialiased;
+    top: -4px;
+    left: -4px;
+    width: calc(50% + 8px);
+    height: calc(100% + 8px);
+    border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: 500;
+    background-color: #4caf50;
+    box-shadow: 0 16px 26px -10px rgba(76, 175, 80, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(76, 175, 80, 0.2);
+    transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.nav-pills {
+    background-color: rgba(200, 200, 200, 0.2);
+    mar
+}
+.nav-pills > div.m-build-new-user-profile__tap-li {
+    width: 33.33333%!important;
+}
+.nav-pills > div.m-build-new-user-profile__tap-li > a {
+    border: 0 !important;
+    border-radius: 0;
+    line-height: 18px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 100px;
+    text-align: center;
+    color: #555555 !important;
+    padding: 10px 15px;
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+}
+.nav-pills > li.m-build-new-user-profile__tap-li > a:hover {
+    outline: 0;
+    text-decoration: none;
+}
+.m-wizard.m-wizard--1 .m-wizard__head {
+    margin-top: 0!important;
+    margin-bottom: 20px!important;
+}
+.m-wizard.m-wizard--1 .m-wizard__head .m-wizard__nav .m-wizard__steps {
+    margin-top: 0!important;
+    width: 100%!important;
+}
+.m-wizard.m-wizard--1 .m-wizard__head .m-wizard__nav .m-wizard__steps .m-wizard__step {
+    display: table-cell;!important;
+}
+.nav-pills > div.m-build-new-user-profile__tap-li > a:hover,
+.nav-pills > div.m-build-new-user-profile__tap-li > a:focus,
+.nav-pills > div.m-build-new-user-profile__tap-li > a:active,
+.nav-pills > div.m-build-new-user-profile__tap-li > a:focus:active {
+    outline: 0;
+    text-decoration: none;
+}
+.position-absolute-slim-container {
+    position: absolute;
+    left: calc(50% - 75px);
+}

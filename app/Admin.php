@@ -2,10 +2,10 @@
 
 namespace App;
 
+use DateTime;
+use \App\Country;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-//Notification for admin
-//use App\Notifications\AdminResetPassword as ResetPasswordNotification;
 
 class Admin extends Authenticatable
 {
@@ -19,21 +19,33 @@ class Admin extends Authenticatable
      * @var array
      */
      protected $fillable = [
-         'username', 'email', 'password',
+         'first_name',
+         'last_name',
+         'username',
+         'unique_id',
+         'avatar',
+         'birth',
+         'email',
+         'password',
      ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+     /**
+      * The attributes that should be hidden for arrays.
+      *
+      * @var array
+      */
+     protected $hidden = [
+         'password', 'remember_token',
+     ];
 
-    public function sendPasswordResetNotification($token)
-    {
-        // Your your own implementation.
-        $this->notify(new ResetPasswordNotification($token));
-    }
+     // public function sendPasswordResetNotification($token)
+     // {
+     //     // Your your own implementation.
+     //     $this->notify(new ResetPasswordNotification($token));
+     // }
+
+     public function getCountry() {
+         $country = Country::find($this->nation);
+         return $country;
+     }
 }
