@@ -9,13 +9,13 @@ join
                 Login
             </h3>
         </div>
-        <form class="m-login__form m-form" action="">
+        <form class="m-login__form m-form" action="{{route('login')}}" method="post">
             <div class="form-group m-form__group">
                 <div class="input-group m-input-group m-input-group--air">
                     <span class="input-group-addon">
                         <i class="la la-envelope"></i>
                     </span>
-                    <input type="email" class="form-control m-input" name="last_name" placeholder="Email*" aria-describedby="basic-addon1">
+                    <input type="email" class="form-control m-input" name="email" placeholder="Email*" aria-describedby="basic-addon1">
                 </div>
             </div>
             <div class="form-group m-form__group">
@@ -23,7 +23,7 @@ join
                     <span class="input-group-addon">
                         <i class="la la-key"></i>
                     </span>
-                    <input type="password" class="form-control m-input" name="last_name" placeholder="Password*" aria-describedby="basic-addon1">
+                    <input type="password" class="form-control m-input" name="password" placeholder="Password*" aria-describedby="basic-addon1">
                 </div>
             </div>
             <div class="row m-login__form-sub">
@@ -41,7 +41,7 @@ join
                 </div>
             </div>
 			<div class="m-login__form-action">
-                <button id="m_login_signup_submit" class="btn btn-focus m-btn btn-outline-accent m-btn--custom m-btn--air">
+                <button type="submit" id="m_login_signin_submit" class="btn btn-focus m-btn btn-outline-accent m-btn--custom m-btn--air">
 					Login
 				</button>
 			</div>
@@ -56,4 +56,7 @@ join
 			</div>
 		</form>
     </div>
+@endsection
+@section('custom_js')
+<script type="text/javascript" src="/js/login.js"></script>
 @endsection

@@ -45,11 +45,6 @@ class LoginController extends Controller
         return view('user.auth.login');
     }
 
-    public function showClientRequestForm()
-    {
-        return view('user.auth.passwords.clientId');
-    }
-
     /**
      * Handle a login request to the application.
      *
@@ -69,18 +64,6 @@ class LoginController extends Controller
 
         if ($availablecheck) {
             $result_array = array('result' => 'success', 'url' => route('profile'));
-            return response()->json($result_array);
-        }
-        $result_array = array('result' => 'fail');
-        return response()->json($result_array);
-    }
-
-    public function checkClientId($client_id)
-    {
-        $user = User::where('client_id', $client_id)->first();
-        if ($user) {
-            $view = view('user.auth.loginInner',compact('user'))->render();
-            $result_array = array('result' => 'success', 'html' => $view);
             return response()->json($result_array);
         }
         $result_array = array('result' => 'fail');

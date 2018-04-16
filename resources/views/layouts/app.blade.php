@@ -23,6 +23,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<meta name="description" content="Latest updates and statistic charts">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="csrf-token" content="{{ csrf_token() }}" />
 		<!--begin::Web font -->
 		{{-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script> --}}
 		<script src="/assets/plugins/webfont.js"></script>
@@ -38,9 +39,11 @@ License: You must have a valid license purchased only from themeforest(the above
         <!--begin::Base Styles -->
 		<link href="/assets/plugins/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/plugins/baseApp/demo4/style.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/plugins/slim/slim.min.css" rel="stylesheet" type="text/css" />
 		<link href="/css/loader.css" rel="stylesheet" type="text/css" />
 		<link href="/css/wowstyle.css" rel="stylesheet" type="text/css" />
 		<link href="/css/frontCustom.css" rel="stylesheet" type="text/css" />
+		@yield('custom_css')
 		<!--end::Base Styles -->
 		<link rel="shortcut icon" href="assets/images/fav_ico.png" />
 	</head>
@@ -105,27 +108,55 @@ License: You must have a valid license purchased only from themeforest(the above
 													</span>
 													<span class="m-topbar__username m--hidden-tablet m--hidden-mobile m--padding-right-15">
 														<span class="m-link">
-															Nick
+															{{Auth::user()->username}}
+															&nbsp;
 														</span>
 													</span>
 													<span class="m-topbar__userpic">
-														<img src="assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless m--img-centered" alt=""/>
+														@if(Auth::user()->avatar == "default.jpg")
+															<img src="/uploads/avatars/default.png" class="m--img-rounded m--marginless m--img-centered m-{{Auth::user()->unique_id}}-profile-avatar" alt=""/>
+														@else
+															@if (file_exists('uploads/avatars/'.Auth::user()->unique_id.'/'.Auth::user()->avatar))
+																<img src="{{asset('uploads/avatars/'.Auth::user()->unique_id.'/'.Auth::user()->avatar)}}" class="m--img-rounded m--marginless m--img-centered m-{{Auth::user()->unique_id}}-profile-avatar" alt="author">
+															@else
+																<img src="/uploads/avatars/default.png" class="m--img-rounded m--marginless m--img-centered m-{{Auth::user()->unique_id}}-profile-avatar" alt="">
+															@endif
+														@endif
 													</span>
 												</a>
-												<div class="m-dropdown__wrapper">
-													<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+												<div class="m-dropdown__wrapper m-masked-dropdown">
 													<div class="m-dropdown__inner">
-														<div class="m-dropdown__header m--align-center" style="background: url(assets/app/media/img/misc/user_profile_bg.jpg); background-size: cover;">
+														<?php
+							                                $coverimg_url = "";
+							                                if (Auth::user()->cover == "default.jpg") {
+							                                    $coverimg_url = "/uploads/covers/default.jpg";
+							                                } else {
+							                                    if (file_exists('uploads/covers/'.Auth::user()->unique_id.'/'.Auth::user()->cover)) {
+							                                        $coverimg_url = '/uploads/covers/'.Auth::user()->unique_id.'/'.Auth::user()->cover;
+							                                    } else {
+							                                        $coverimg_url = "/uploads/covers/default.jpg";
+							                                    }
+							                                }
+							                            ?>
+														<div class="m-dropdown__header m--align-center m-{{Auth::user()->unique_id}}-profile-cover" style="background: url({{$coverimg_url}}); background-size: cover;background-repeat: no-repeat;background-position: center;">
 															<div class="m-card-user m-card-user--skin-dark">
 																<div class="m-card-user__pic">
-																	<img src="assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt=""/>
+																	@if(Auth::user()->avatar == "default.jpg")
+																		<img src="/uploads/avatars/default.png" class="m--img-rounded m--marginless m-{{Auth::user()->unique_id}}-profile-avatar" alt=""/>
+																	@else
+																		@if (file_exists('uploads/avatars/'.Auth::user()->unique_id.'/'.Auth::user()->avatar))
+																			<img src="{{asset('uploads/avatars/'.Auth::user()->unique_id.'/'.Auth::user()->avatar)}}" class="m--img-rounded m--marginless m-{{Auth::user()->unique_id}}-profile-avatar" alt="author">
+																		@else
+																			<img src="/uploads/avatars/default.png" class="m--img-rounded m--marginless m-{{Auth::user()->unique_id}}-profile-avatar" alt="">
+																		@endif
+																	@endif
 																</div>
 																<div class="m-card-user__details">
 																	<span class="m-card-user__name m--font-weight-500">
-																		Mark Andre
+																		{{Auth::user()->first_name}} {{Auth::user()->last_name}}
 																	</span>
 																	<a href="" class="m-card-user__email m--font-weight-300 m-link">
-																		mark.andre@gmail.com
+																		{{Auth::user()->email}}
 																	</a>
 																</div>
 															</div>
@@ -139,60 +170,25 @@ License: You must have a valid license purchased only from themeforest(the above
 																		</span>
 																	</li>
 																	<li class="m-nav__item">
-																		<a href="profile.html" class="m-nav__link">
+																		<a href="{{route('profile')}}" class="m-nav__link">
 																			<i class="m-nav__link-icon flaticon-profile-1"></i>
 																			<span class="m-nav__link-title">
 																				<span class="m-nav__link-wrap">
 																					<span class="m-nav__link-text">
 																						My Profile
 																					</span>
-																					<span class="m-nav__link-badge">
-																						<span class="m-badge m-badge--success">
-																							2
-																						</span>
-																					</span>
 																				</span>
 																			</span>
 																		</a>
 																	</li>
-																	<li class="m-nav__item">
-																		<a href="profile.html" class="m-nav__link">
-																			<i class="m-nav__link-icon flaticon-share"></i>
-																			<span class="m-nav__link-text">
-																				Activity
-																			</span>
-																		</a>
-																	</li>
-																	<li class="m-nav__item">
-																		<a href="profile.html" class="m-nav__link">
-																			<i class="m-nav__link-icon flaticon-chat-1"></i>
-																			<span class="m-nav__link-text">
-																				Messages
-																			</span>
-																		</a>
-																	</li>
 																	<li class="m-nav__separator m-nav__separator--fit"></li>
-																	<li class="m-nav__item">
-																		<a href="profile.html" class="m-nav__link">
-																			<i class="m-nav__link-icon flaticon-info"></i>
-																			<span class="m-nav__link-text">
-																				FAQ
-																			</span>
-																		</a>
-																	</li>
-																	<li class="m-nav__item">
-																		<a href="profile.html" class="m-nav__link">
-																			<i class="m-nav__link-icon flaticon-lifebuoy"></i>
-																			<span class="m-nav__link-text">
-																				Support
-																			</span>
-																		</a>
-																	</li>
-																	<li class="m-nav__separator m-nav__separator--fit"></li>
-																	<li class="m-nav__item">
-																		<a href="snippets/pages/user/login-1.html" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+																	<li>
+																		<a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
 																			Logout
 																		</a>
+                                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                                            @csrf
+                                                                        </form>
 																	</li>
 																</ul>
 															</div>
@@ -201,8 +197,8 @@ License: You must have a valid license purchased only from themeforest(the above
 												</div>
 											</li>
 										@else
-											<li class="m-nav__item @if (Route::currentRouteName()=='wellcome') active @endif">
-												<a href="{{route('wellcome')}}" class="m-nav__link m-dropdown__toggle ifundfilms-top-header">
+											<li class="m-nav__item @if (Route::currentRouteName()=='welcome') active @endif">
+												<a href="{{route('welcome')}}" class="m-nav__link m-dropdown__toggle ifundfilms-top-header">
 													<span>Home</span>
 												</a>
 											</li>
@@ -304,21 +300,21 @@ License: You must have a valid license purchased only from themeforest(the above
 								<div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-light "  >
 									<ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
 										<li class="m-menu__item  m-menu__item--active"  aria-haspopup="true">
-											<a  href="index.html" class="m-menu__link ">
+											<a  href="{{route('welcome')}}" class="m-menu__link ">
 												<span class="m-menu__link-text">
 													Home
 												</span>
 											</a>
 										</li>
 										<li class="m-menu__item  m-menu__item--active"  aria-haspopup="true">
-											<a  href="index.html" class="m-menu__link ">
+											<a  href="{{route('film')}}" class="m-menu__link ">
 												<span class="m-menu__link-text">
 													Our Film
 												</span>
 											</a>
 										</li>
 										<li class="m-menu__item  m-menu__item--active"  aria-haspopup="true">
-											<a  href="index.html" class="m-menu__link ">
+											<a  href="{{route('howitowork')}}" class="m-menu__link ">
 												<span class="m-menu__link-text">
 													Hor it work
 												</span>
@@ -339,7 +335,7 @@ License: You must have a valid license purchased only from themeforest(the above
 											</a>
 										</li>
 										<li class="m-menu__item  m-menu__item--active"  aria-haspopup="true">
-											<a  href="index.html" class="m-menu__link ">
+											<a  href="{{route('contact')}}" class="m-menu__link ">
 												<span class="m-menu__link-text">
 													Contact Us
 												</span>
@@ -361,7 +357,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										<area href="http://www.linkedin.com/ifundfilms.com" target="_blank" alt="linkedin" shape="rect" coords="103, 25, 144, 65">
 										<area href="http://www.youtube.com/ifundfilms" target="_blank" alt="youtube" shape="rect" coords="152, 15, 197, 55">
 										<area href="http://www.twitter.com/ifundfilms" target="_blank" alt="twitter" shape="rect" coords="200, 10, 245, 50">
-										<area href="/contact" target="_blank" alt="contact" shape="rect" coords="250, 12, 295, 52">
+										<area href="/contact" alt="contact" shape="rect" coords="250, 12, 295, 52">
 										<area href="http://www.imdb.com/ifundfilms" target="_blank" alt="imdb" shape="rect" coords="300, 25, 345, 65">
 									</map>
 									<img src="/assets/images/share_link.png" alt="" usemap="#planetmap">
@@ -388,7 +384,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
 								<ul class="m-footer__nav m-nav m-nav--skin-dark m-nav--inline m--pull-right">
 									<li class="m-nav__item">
-										<a href="#" class="m-nav__link">
+										<a href="{{route('term')}}" target="_blank" class="m-nav__link">
 											<span class="m-nav__link-text">
 												Terms & Conditions
 											</span>
@@ -402,7 +398,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										</a>
 									</li>
 									<li class="m-nav__item">
-										<a href="#"  class="m-nav__link">
+										<a href="{{route('privacy')}}" target="_blank" class="m-nav__link">
 											<span class="m-nav__link-text">
 												Privacy Policy - Legal
 											</span>
@@ -424,9 +420,11 @@ License: You must have a valid license purchased only from themeforest(the above
     	<!--begin::Base Scripts -->
 		<script src="/assets/plugins/base/vendors.bundle.js" type="text/javascript"></script>
 		<script src="/assets/plugins/baseApp/demo4/scripts.bundle.js" type="text/javascript"></script>
+		<script src="/assets/plugins/slim/slim.kickstart.min.js" type="text/javascript"></script>
 		<!--end::Base Scripts -->
 		<script type="text/javascript" src="/js/wowslider.js"></script>
 		<script type="text/javascript" src="/js/wowscript.js"></script>
+		@yield('custom_js')
 		<script>
 			window.onload = function () {
 				setTimeout(function () {

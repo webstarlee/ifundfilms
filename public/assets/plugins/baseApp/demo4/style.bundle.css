@@ -15851,7 +15851,7 @@ code {
       border-radius: 100%; }
     .m-card-profile .m-card-profile__pic img {
       text-align: center;
-      max-width: 130px !important;
+      max-width: 100%!important;
       margin: 0 auto !important;
       -webkit-border-radius: 100%;
       -moz-border-radius: 100%;

@@ -6,14 +6,7 @@ use Auth;
 use DateTime;
 use App\Slim;
 use App\User;
-use App\Task;
-use App\Ticket;
 use App\Admin;
-use App\Event;
-use App\Holiday;
-use App\Project;
-use App\Attendance;
-use App\TimingSheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -78,7 +71,8 @@ class UserController extends Controller
 
     public function profile()
     {
-        return view('user.profile');
+        $employee = Auth::user();
+        return view('user.profile', ['employee' => $employee]);
     }
 
     public function profileUpdateAvatar(Request $request)
@@ -507,5 +501,20 @@ class UserController extends Controller
             );
         }
         return $final_tickets;
+    }
+
+    public function contact()
+    {
+        return view('user.contact');
+    }
+
+    public function film()
+    {
+        return view('user.film');
+    }
+
+    public function howItWork()
+    {
+        return view('user.how');
     }
 }

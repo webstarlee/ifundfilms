@@ -9,7 +9,7 @@ join
                 Join
             </h3>
         </div>
-        <form class="m-login__form m-form" action="">
+        <form class="m-login__form m-form" action="{{route('register')}}" method="post">
             <div class="form-group m-form__group">
                 <div class="input-group m-input-group m-input-group--air">
                     <span class="input-group-addon">
@@ -39,7 +39,7 @@ join
                     <span class="input-group-addon">
                         <i class="la la-envelope"></i>
                     </span>
-                    <input type="email" class="form-control m-input" name="last_name" placeholder="Email*" aria-describedby="basic-addon1">
+                    <input type="email" class="form-control m-input" name="email" placeholder="Email*" aria-describedby="basic-addon1">
                 </div>
             </div>
             <div class="form-group m-form__group">
@@ -47,7 +47,7 @@ join
                     <span class="input-group-addon">
                         <i class="la la-key"></i>
                     </span>
-                    <input type="password" class="form-control m-input" name="last_name" placeholder="Password*" aria-describedby="basic-addon1">
+                    <input type="password" class="form-control m-input" id="confirm_password" name="password" placeholder="Password*" aria-describedby="basic-addon1">
                 </div>
             </div>
             <div class="form-group m-form__group">
@@ -55,7 +55,7 @@ join
                     <span class="input-group-addon">
                         <i class="la la-key"></i>
                     </span>
-                    <input type="text" class="form-control m-input" name="last_name" placeholder="Confirm Password*" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control m-input" name="password_confirmation" placeholder="Confirm Password*" aria-describedby="basic-addon1">
                 </div>
             </div>
 			<div class="row form-group m-form__group m-login__form-sub">
@@ -63,7 +63,7 @@ join
 					<label class="m-checkbox m-checkbox--focus">
 						<input type="checkbox" name="agree">
 						I Agree the
-						<a href="#" class="m-link m-link--focus">
+						<a href="{{route('term')}}" target="_blank" class="m-link m-link--focus">
 							terms and conditions
 						</a>
 						.
@@ -86,4 +86,7 @@ join
 			</div>
 		</form>
     </div>
+@endsection
+@section('custom_js')
+<script type="text/javascript" src="/js/register.js"></script>
 @endsection

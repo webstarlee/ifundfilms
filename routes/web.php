@@ -32,13 +32,19 @@ Route::get('/js/language.js', function(){
 });
 Route::get('/', function () {
     return view('welcome');
-})->name('wellcome');
+})->name('welcome');
 Route::get('/404', function () {
     return view('404');
 })->name('404');
 Route::get('/405', function () {
     return view('405');
 })->name('405');
+Route::get('/term-condition', function () {
+    return view('term');
+})->name('term');
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
 
 Route::get('login', 'User\Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'User\Auth\LoginController@login');
@@ -55,18 +61,18 @@ Route::get('check-client-id/{id}', 'User\Auth\LoginController@checkClientId');
 Route::get('register', 'User\Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'User\Auth\RegisterController@register');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', 'User\UserController@index')->name('dashboard');
-    Route::get('/dashboard/calendarEvent', 'User\UserController@getDashboardEvent');
-    Route::get('/profile', 'User\UserController@profile')->name('profile');
-    Route::post('/profile/update/avatar', 'User\UserController@profileUpdateAvatar')->name('profile.update.avatar');
-    Route::post('/profile/update/cover', 'User\UserController@profileUpdateCover')->name('profile.update.avatar');
-    Route::get('profile/username/validater/{newusername}', 'User\UserController@usernameValidate');
-    Route::get('profile/email/validater/{newemail}', 'User\UserController@emailValidate');
-    Route::post('profile/update/unique', 'User\UserController@updateEmployeeUnique');
-    Route::post('profile/update/info', 'User\UserController@updateEmployeeInfo');
-    Route::post('profile/update/password', 'User\UserController@updateEmployeePassOwn');
-});
+Route::get('/dashboard', 'User\UserController@index')->name('dashboard');
+Route::get('/contact', 'User\UserController@contact')->name('contact');
+Route::get('/film', 'User\UserController@film')->name('film');
+Route::get('/how-it-work', 'User\UserController@howItWork')->name('howitowork');
+Route::get('/profile', 'User\UserController@profile')->name('profile');
+Route::post('/profile/update/avatar', 'User\UserController@profileUpdateAvatar')->name('profile.update.avatar');
+Route::post('/profile/update/cover', 'User\UserController@profileUpdateCover')->name('profile.update.avatar');
+Route::get('profile/username/validater/{newusername}', 'User\UserController@usernameValidate');
+Route::get('profile/email/validater/{newemail}', 'User\UserController@emailValidate');
+Route::post('profile/update/unique', 'User\UserController@updateEmployeeUnique');
+Route::post('profile/update/info', 'User\UserController@updateEmployeeInfo');
+Route::post('profile/update/password', 'User\UserController@updateEmployeePassOwn');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', 'User\UserController@index')->name('dashboard');
