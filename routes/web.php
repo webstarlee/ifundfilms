@@ -32,7 +32,7 @@ Route::get('/js/language.js', function(){
 });
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('wellcome');
 Route::get('/404', function () {
     return view('404');
 })->name('404');
@@ -51,6 +51,9 @@ Route::post('password/email', 'User\Auth\ForgotPasswordController@sendResetLinkE
 Route::get('password/reset/{token}', 'User\Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'User\Auth\ResetPasswordController@reset');
 Route::get('check-client-id/{id}', 'User\Auth\LoginController@checkClientId');
+//register
+Route::get('register', 'User\Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'User\Auth\RegisterController@register');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', 'User\UserController@index')->name('dashboard');

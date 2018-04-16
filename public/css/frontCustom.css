@@ -1,0 +1,234 @@
+.company-main-logo-img {
+    max-width: 200px;
+}
+.ifund-slider-container {
+    padding: 30px;
+    background-color: #c3c8ce;
+    border-top: 4px solid #fff;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+.special-tap-container {
+    background-image: url('/assets/images/paste-wizard_services.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 110%;
+    box-shadow: 0px 4px 4px -3px rgba(0,0,0,0.6);
+    padding: 10px 20px 20px;
+}
+.instruction-containers-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.img-container-instruction {
+    display: inline-block;
+}
+.text-container-instruction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 25px;
+}
+.text-container-instruction>p {
+    margin: 0;
+    font-family: Verdana;
+}
+.text-container-instruction>p.title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #6b2482;
+}
+.intro-video-container {
+    max-width: 600px;
+    margin:  0 auto;
+    padding: 0 20px;
+}
+.some-description-container {
+    margin-top: 30px;
+    position: relative;
+    padding-bottom: 100px;
+    text-align: center;
+}
+.some-description-container>p {
+    margin: 0;
+    text-align: center;
+    font-size: 16px;
+    font-family: verdana;
+    color: #79056f;
+    font-weight: bold;
+}
+.join-big-img-a {
+    display: inline-block;
+    width: 130px;
+    height: 140px;
+    background-image: url('/assets/images/join_brn_none.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 2px;
+    right: 10%;
+    transition: all .2s ease-out;
+}
+.join-big-img-a:hover {
+    top: 0;
+    background-image: url('/assets/images/join_brn_hover.png');
+}
+.share-social-link-container {
+    position: relative;
+    max-width: 350px;
+    width: 100%;
+    height: 87px;
+    margin: 0 auto;
+}
+.share-social-link-container>img {
+    width: 100%;
+}
+.m-nav > .m-nav__item > .m-nav__link.ifundfilms-top-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.m-topbar .m-topbar__nav.m-nav > .m-nav__item {
+    padding: 0!important;
+}
+.m-auth-container {
+    padding: 20px;
+}
+.m-auth-container>.m-login__form.m-form {
+    max-width: 350px;
+    margin: 0 auto 20px auto
+}
+.m-auth-container .m-login__form-action {
+    text-align: center;
+}
+.m-auth-container .m-login__title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.m-auth-container .m-login__account {
+    margin-top: 20px;
+    text-align: center;
+}
+@media (min-width: 993px) {
+    .m-nav > .m-nav__item > .m-nav__link.ifundfilms-top-header>span {
+        display: inline-block;
+        text-align: center;
+        width: 90px;
+        height: 61px;
+        padding-top: 10px;
+        color: #67acc2;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .m-nav > .m-nav__item > .m-nav__link.ifundfilms-top-header>span:hover {
+        display: inline-block;
+        text-align: center;
+        background-image: url(/assets/images/ifundfilms-funding_menu_hover.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #fff;
+    }
+    .m-nav > .m-nav__item.active > .m-nav__link.ifundfilms-top-header>span {
+        display: inline-block;
+        text-align: center;
+        background-image: url(/assets/images/ifundfilms-funding_menu_hover.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #fff;
+    }
+    .m-grid__item.m-body__nav {
+        height: 45px;
+        box-shadow: none;
+        position: relative;
+        background-color: #f3f4f9;
+    }
+    .m-header-menu .m-menu__nav > .m-menu__item > .m-menu__link .m-menu__link-text {
+        font-size: 12px;
+        color: #000;
+        font-family: verdana;
+    }
+    .m-header-menu .m-menu__nav > .m-menu__item > .m-menu__link .m-menu__link-text:hover {
+        color: #32119c!important;
+    }
+    .ifundfilm-nav-flex {
+        display: flex!important;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .m-grid__item.m-body__nav::after {
+        content: "";
+        height: 1px;
+        width: 100%;
+        background-image: url('/assets/images/goldfade.gif');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .m-grid__item.m-body__nav::before {
+        content: "";
+        height: 1px;
+        width: 100%;
+        background-image: url('/assets/images/goldfade.gif');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+}
+@media (max-width: 994px) {
+    .m-nav > .m-nav__item > .m-nav__link.ifundfilms-top-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .company-main-logo-img {
+        max-width: 160px;
+    }
+    .special-tap-container {
+        background-size: cover;
+    }
+    .instruction-containers-div {
+        justify-content: start;
+    }
+    .m-topbar--on .m-topbar {
+        z-index: 91;
+    }
+}
+
+@media(max-width: 845px) {
+    .join-big-img-a {
+        right: 7%;
+    }
+}
+@media(max-width: 780px) {
+    .join-big-img-a {
+        right: 15%;
+        top: 25px;
+    }
+    .join-big-img-a:hover {
+        top: 23px;
+    }
+    .ifund-slider-container {
+        padding: 10px;
+    }
+}
+@media(max-width: 630px) {
+    .join-big-img-a {
+        position: relative;
+        top: unset;
+        right: unset;
+    }
+    .some-description-container {
+        padding-bottom: 0;
+    }
+}
