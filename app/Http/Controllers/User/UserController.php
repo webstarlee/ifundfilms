@@ -248,10 +248,7 @@ class UserController extends Controller
         if ($employee) {
             $employee->first_name = $request->firstName;
             $employee->last_name = $request->lastName;
-            $employee->birth = $request->birth;
-            $employee->social_number = $request->socialNumber;
-            $employee->personal_number = $request->personalNumber;
-            $employee->emergency_contact = $request->emergencyContact;
+            $employee->birth = $this->encode_date_format($request->birth);
             $employee->save();
 
             return back();
@@ -274,30 +271,17 @@ class UserController extends Controller
         return "fail";
     }
 
-    public function myproject()
-    {
-        return view('user.project');
-    }
-
-    public function mytask()
-    {
-        return view('user.task');
-    }
-
-    public function mytimingsheet()
-    {
-        return view('user.timeSheet');
-    }
-
-    public function ticket()
-    {
-        return view('user.ticket');
-    }
-
     public function decode_date_format($date)
     {
         $selectedDate = DateTime::createFromFormat('Y-m-d', $date);
         $finalDate = $selectedDate->format('m/d/Y');
+        return $finalDate;
+    }
+
+    public function encode_date_format($date)
+    {
+        $selectedDate = DateTime::createFromFormat('m/d/Y', $date);
+        $finalDate = $selectedDate->format('Y-m-d');
         return $finalDate;
     }
 
@@ -316,191 +300,6 @@ class UserController extends Controller
     public function decode_time_format($time)
     {
         return date( "H:i:s", strtotime($time));
-    }
-
-    public function getMyproject()
-    {
-        $all_projects = Project::all();
-        $myprojects = array();
-        foreach ($all_projects as $singleProject) {
-            $members = unserialize($singleProject->pro_members);
-            if ($singleProject->pro_leader == Auth::user()->unique_id || in_array(Auth::user()->unique_id, $members)) {
-                array_push($myprojects, $singleProject);
-            }
-        }
-
-        $final_projects = array();
-        if (count($myprojects) > 0) {
-            foreach ($myprojects as $project) {
-                $leader_admin = Admin::where('unique_id', $project->pro_leader)->first();
-                $leader = "";
-                if ($leader_admin) {
-                    $leader = $leader_admin;
-                } elseif ($project->pro_leader == Auth::user()->unique_id) {
-                    $leader = Auth::user();
-                }
-                $leader_avatar = "";
-
-                if (file_exists('uploads/avatars/'.$leader->unique_id.'/'.$leader->avatar)) {
-                    $leader_avatar = asset('/uploads/avatars/'.$leader->unique_id.'/'.$leader->avatar);
-                } else {
-                    $leader_avatar = asset('/uploads/avatars/default.png');
-                }
-
-                $members = array();
-                if ($project->pro_members != null || $project->pro_members != "") {
-                    $serial_members = unserialize($project->pro_members);
-                    foreach ($serial_members as $unique_id) {
-                        $member = User::where('unique_id', $unique_id)->first();
-                        $member_avatar = "";
-                        if (file_exists('uploads/avatars/'.$member->unique_id.'/'.$member->avatar)) {
-                            $member_avatar = asset('/uploads/avatars/'.$member->unique_id.'/'.$member->avatar);
-                        } else {
-                            $member_avatar = asset('/uploads/avatars/default.png');
-                        }
-                        $members[] = array('member_username' => $member->first_name." ".$member->last_name, 'member_avatar' => $member_avatar, 'member_unique' => $member->unique_id);
-                    }
-                }
-
-                $final_projects[] = array(
-                    'id' => $project->id,
-                    'pro_name' => $project->pro_name,
-                    'pro_id' => $project->pro_unid,
-                    'pro_start_date' => $this->decode_date_format($project->pro_start_date),
-                    'pro_end_date' => $this->decode_date_format($project->pro_end_date),
-                    'leader_name' => $leader->first_name." ".$leader->last_name,
-                    'leader_photo' => $leader_avatar,
-                    'leader_unique' => $leader->unique_id,
-                    'members' => $members,
-                    'pro_priority' => $project->pro_priority,
-                    'pro_status' => $project->pro_status,
-                );
-            }
-        }
-
-        return $final_projects;
-    }
-
-    public function getTaskTableData()
-    {
-        $tasks = Task::join('projects', 'projects.id', '=', 'tasks.pro_id')->select('tasks.*', 'projects.pro_name')->get();
-        $my_tasks = array();
-        foreach ($tasks as $singletask) {
-            $serial_assings = unserialize($singletask->task_assign);
-            if (in_array(Auth::user()->unique_id, $serial_assings)) {
-                array_push($my_tasks, $singletask);
-            }
-        }
-
-        $final_tasks = array();
-        if (count($my_tasks) > 0) {
-            foreach ($my_tasks as $task) {
-                $members = array();
-                if ($task->task_assign != null || $task->task_assign != "") {
-                    $serial_members = unserialize($task->task_assign);
-                    foreach ($serial_members as $unique_id) {
-                        $member = User::where('unique_id', $unique_id)->first();
-                        $member_avatar = "";
-                        if (file_exists('uploads/avatars/'.$member->unique_id.'/'.$member->avatar)) {
-                            $member_avatar = asset('/uploads/avatars/'.$member->unique_id.'/'.$member->avatar);
-                        } else {
-                            $member_avatar = asset('/uploads/avatars/default.png');
-                        }
-                        $members[] = array('member_username' => $member->first_name." ".$member->last_name, 'member_avatar' => $member_avatar, 'member_unique' => $member->unique_id);
-                    }
-                }
-
-                $final_tasks[] = array(
-                    'id' => $task->id,
-                    'pro_name' => $task->pro_name,
-                    'task_name' => $task->task_title,
-                    'task_status' => $task->task_status,
-                    'members' => $members,
-                );
-            }
-        }
-
-        return $final_tasks;
-    }
-
-    public function getSheetTableData()
-    {
-        $sheets = TimingSheet::where('employee_id', Auth::user()->unique_id)->join('projects', 'projects.id', '=', 'timing_sheets.pro_id')->select('timing_sheets.*', 'projects.pro_name')->get();
-        $final_sheets = array();
-        foreach ($sheets as $sheet) {
-            $member = Auth::user();
-            $photo_url = "";
-            if (file_exists('uploads/avatars/'.$member->unique_id.'/'.$member->avatar)) {
-                $photo_url = asset('/uploads/avatars/'.$member->unique_id.'/'.$member->avatar);
-            } else {
-                $photo_url = asset('/uploads/avatars/default.png');
-            }
-
-            $final_sheets[] = array(
-                'id' => $sheet->id,
-                'pro_name' => $sheet->pro_name,
-                'sheet_date' => $this->decode_date_format($sheet->sheet_date),
-                'sheet_time' => $sheet->work_time,
-                'sheet_note' => $sheet->sheet_note,
-                'employee_name' => $member->first_name.' '.$member->last_name,
-                'employee_photo' => $photo_url,
-                'employee_unique_id' => $member->unique_id,
-            );
-        }
-        return $final_sheets;
-    }
-    public function getTicketTableData()
-    {
-        $tickets = Ticket::all();
-        $myticket = array();
-        foreach ($tickets as $singleTicket) {
-            $serialedTickets = unserialize($singleTicket->ticket_follower);
-            if (in_array(Auth::user()->unique_id, $serialedTickets) || $singleTicket->ticket_staff == Auth::user()->unique_id) {
-                array_push($myticket, $singleTicket);
-            }
-        }
-
-        $final_tickets = array();
-        foreach ($myticket as $ticket) {
-            $assign_staff = User::where('unique_id', $ticket->ticket_staff)->first();
-            $assign_staff_avatar = "";
-            if (file_exists('uploads/avatars/'.$assign_staff->unique_id.'/'.$assign_staff->avatar)) {
-                $assign_staff_avatar = asset('/uploads/avatars/'.$assign_staff->unique_id.'/'.$assign_staff->avatar);
-            } else {
-                $assign_staff_avatar = asset('/uploads/avatars/default.png');
-            }
-
-            $followers = array();
-            if ($ticket->ticket_follower != null || $ticket->ticket_follower != "") {
-                $serialed_followers = unserialize($ticket->ticket_follower);
-                foreach ($serialed_followers as $unique_id) {
-                    $member = User::where('unique_id', $unique_id)->first();
-                    $member_avatar = "";
-                    if (file_exists('uploads/avatars/'.$member->unique_id.'/'.$member->avatar)) {
-                        $member_avatar = asset('/uploads/avatars/'.$member->unique_id.'/'.$member->avatar);
-                    } else {
-                        $member_avatar = asset('/uploads/avatars/default.png');
-                    }
-                    $followers[] = array('follower_username' => $member->first_name." ".$member->last_name, 'follower_avatar' => $member_avatar, 'follower_unique' => $member->unique_id);
-                }
-            }
-
-            $final_tickets[] = array(
-                'id' => $ticket->id,
-                'ticket_unique_id' => $ticket->ticket_unique_id,
-                'ticket_subject' => $ticket->ticket_subject,
-                'ticket_client' => $ticket->ticket_client,
-                'ticket_staff_name' => $assign_staff->first_name." ".$assign_staff->last_name,
-                'ticket_staff_avatar' => $assign_staff_avatar,
-                'ticket_staff_id' => $assign_staff->unique_id,
-                'ticket_priority' => $ticket->ticket_priority,
-                'ticket_followers' => $followers,
-                'ticket_note' => $ticket->ticket_note,
-                'ticket_status' => $ticket->ticket_status,
-                'ticket_create_date' => $this->decode_date_time_format($ticket->created_at),
-            );
-        }
-        return $final_tickets;
     }
 
     public function contact()

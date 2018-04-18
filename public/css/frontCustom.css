@@ -209,7 +209,7 @@
     margin-top: 30px;
 }
 .profile-container {
-    padding: 30px;
+    padding: 0 30px;
 }
 @media (min-width: 993px) {
     .contact-single-container.text-container {

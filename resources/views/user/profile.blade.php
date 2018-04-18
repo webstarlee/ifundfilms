@@ -173,7 +173,7 @@
                             <div class="m-portlet__body">
                                 <div class="form-group m-form__group row">
                                     <div class="col-12">
-                                        <form class="m-form m-form--fit m-form--label-align-right" id="m-user-profile-pass-change__force" action="{{url('profile/update/password')}}" method="post">
+                                        <form class="m-form m-form--fit m-form--label-align-right" id="m-user-profile-pass-change__own-form" action="{{url('profile/update/password')}}" method="post">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12"></div>
                                                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">

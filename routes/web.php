@@ -10,6 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/mail', function(){
+//     Mail::send(['text' => 'email.html'], ['name' => 'Assassin'], function ($message){
+//       $message->to('webstar611@gmail.com', 'Assassiner')->subject('Welcome to Expertphp.in!');
+//       $message->from('tms@support.com', 'from me');
+//     });
+// });
+
 Route::get('/js/language.js', function(){
     Cache::forget('lang.js');
     $strings = Cache::rememberForever('lang.js', function () {
