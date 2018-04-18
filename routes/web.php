@@ -53,6 +53,8 @@ Route::get('/privacy', function () {
     return view('privacy');
 })->name('privacy');
 
+Route::post('sendContactEmail', 'User\UserController@sendContactEmail')->name('contactEmail');
+
 Route::get('login', 'User\Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'User\Auth\LoginController@login');
 Route::post('logout', 'User\Auth\LoginController@logout')->name('logout');

@@ -15,7 +15,7 @@ Contact
                 </div>
             </div>
             <div class="col-sm-6">
-                <form class="contact-single-container">
+                <form class="contact-single-container" id="contact-email-send-form" action="{{route('contactEmail')}}" method="post">
                     <div class="form-group m-form__group">
                         <label for="exampleInputEmail1">
                             Name*:
@@ -35,7 +35,7 @@ Contact
                             <span class="input-group-addon">
                                 <i class="la la-envelope"></i>
                             </span>
-                            <input type="text" class="form-control m-input" name="first_name" placeholder="Email" aria-describedby="basic-addon1" required />
+                            <input type="email" class="form-control m-input" name="email" placeholder="Email" aria-describedby="basic-addon1" required />
                         </div>
                     </div>
                     <div class="form-group m-form__group">
@@ -46,20 +46,23 @@ Contact
                             <span class="input-group-addon">
                                 <i class="la la-ils"></i>
                             </span>
-                            <input type="text" class="form-control m-input" name="first_name" placeholder="Subject" aria-describedby="basic-addon1" required />
+                            <input type="text" class="form-control m-input" name="subject" placeholder="Subject" aria-describedby="basic-addon1" required />
                         </div>
                     </div>
                     <div class="form-group m-form__group">
-                        <label for="contract_description">
+                        <label for="message">
                             Message*:
                         </label>
-                        <textarea class="form-control m-input m-input--air" name="contract_description" id="contract_description" placeholder="Message" rows="3" required></textarea>
+                        <textarea class="form-control m-input m-input--air" name="message" id="message" placeholder="Message" rows="3" required></textarea>
                     </div>
                     <div class="form-group m-form__group" style="text-align: center;">
-                        <button type="button" class="btn btn-squre m-btn btn-outline-accent m-btn--custom m-btn--air" name="button">Send message</button>
+                        <button type="submit" class="btn btn-squre m-btn btn-outline-accent m-btn--custom m-btn--air form-submit-btn" name="button">Send message</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+@endsection
+@section('custom_js')
+<script type="text/javascript" src="/js/contact.js"></script>
 @endsection

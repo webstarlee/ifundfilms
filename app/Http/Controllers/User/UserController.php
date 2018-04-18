@@ -7,7 +7,9 @@ use DateTime;
 use App\Slim;
 use App\User;
 use App\Admin;
+use App\Mail\ContactUs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -315,5 +317,19 @@ class UserController extends Controller
     public function howItWork()
     {
         return view('user.how');
+    }
+
+    public function sendContactEmail(Request $request)
+    {
+        $userName = $request->username;
+        $userEmail = $request->email;
+        $subject = $request->subject;
+        $message = $request->message;
+        Mail::to('chol.r@hotmail.com')->send(new ContactUs($userName, $userEmail, $subject, $message));
+        if(Mail::failures())
+        {
+            return "fail";
+        }
+        return "success";
     }
 }
