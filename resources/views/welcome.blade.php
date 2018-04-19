@@ -13,7 +13,7 @@ Home
     </div>
     <div class="some-description-container">
         <p>Watch video then join the exciting movie industry</p>
-        <p>and earn contined income</p>
+        <p>and earn continued income</p>
         @if (!Auth::check())
             <a href="{{route('register')}}" class="join-big-img-a"></a>
         @endif

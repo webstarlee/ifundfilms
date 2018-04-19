@@ -3,6 +3,10 @@
   font-family: verdana;
   src: url('/fonts/Verdana.ttf');
 }
+@font-face {
+  font-family: verdana_bold;
+  src: url('/fonts/verdanab.ttf');
+}
 .loader-container {
   position: fixed;
   float: left;
