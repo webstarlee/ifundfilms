@@ -1,4 +1,8 @@
 /*=========== pre-loader css =============*/
+@font-face {
+  font-family: verdana;
+  src: url('/fonts/Verdana.ttf');
+}
 .loader-container {
   position: fixed;
   float: left;

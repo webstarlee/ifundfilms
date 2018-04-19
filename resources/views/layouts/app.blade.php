@@ -309,14 +309,14 @@ License: You must have a valid license purchased only from themeforest(the above
 										<li class="m-menu__item  m-menu__item--active"  aria-haspopup="true">
 											<a  href="{{route('film')}}" class="m-menu__link ">
 												<span class="m-menu__link-text">
-													Our Film
+													Our Films
 												</span>
 											</a>
 										</li>
 										<li class="m-menu__item  m-menu__item--active"  aria-haspopup="true">
 											<a  href="{{route('howitowork')}}" class="m-menu__link ">
 												<span class="m-menu__link-text">
-													Hor it work
+													How it work
 												</span>
 											</a>
 										</li>

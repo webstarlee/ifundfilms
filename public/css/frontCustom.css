@@ -87,9 +87,8 @@
     color: #6b2482;
 }
 .intro-video-container {
-    max-width: 600px;
+    max-width: 70%;
     margin:  0 auto;
-    padding: 0 20px;
 }
 .some-description-container {
     margin-top: 30px;
@@ -344,5 +343,8 @@
     }
     .some-description-container {
         padding-bottom: 0;
+    }
+    .intro-video-container {
+        max-width: 90%;
     }
 }
