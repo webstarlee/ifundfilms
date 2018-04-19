@@ -1,11 +1,11 @@
 @extends('layouts.adminApp')
 
 @section('title')
-Manage Employees
+Manage Investor
 @endsection
 
 @section('pageTitle')
-Employee Management
+Investor Management
 @endsection
 
 @section('customStyle')
@@ -18,7 +18,7 @@ Employee Management
 			<div class="m-portlet__head-caption">
 				<div class="m-portlet__head-title">
 					<h3 class="m-portlet__head-text">
-						<i class="la la-gear"></i> &nbsp;Employee Management
+						<i class="la la-gear"></i> &nbsp;Investor Management
 					</h3>
 				</div>
 			</div>
@@ -124,7 +124,7 @@ Employee Management
 							<span>
 								<i class="la la-user-plus"></i>
 								<span>
-									New Employee
+									New Investor
 								</span>
 							</span>
 						</a>
